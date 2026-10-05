@@ -1,0 +1,99 @@
+:root {
+  --yf-bg: #070809;
+  --yf-panel: #111315;
+  --yf-panel-2: #181b1e;
+  --yf-line: rgba(255, 145, 48, .18);
+  --yf-orange: #ff7a18;
+  --yf-amber: #ffc04a;
+  --yf-hot: #ff3d0a;
+  --yf-text: #f7f7f2;
+  --yf-muted: #9da3aa;
+  --yf-green: #8cf4b0;
+}
+
+html, body, #root { min-height: 100%; }
+html { background: var(--yf-bg) !important; }
+body {
+  margin: 0;
+  color: var(--yf-text) !important;
+  background:
+    radial-gradient(900px 560px at 72% -12%, rgba(255, 91, 10, .16), transparent 64%),
+    radial-gradient(700px 500px at 14% 40%, rgba(255, 174, 50, .07), transparent 70%),
+    var(--yf-bg) !important;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .15; z-index: 0;
+  background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, black, transparent 82%);
+}
+#root { position: relative; z-index: 1; }
+* { box-sizing: border-box; }
+button, input, select { font: inherit !important; }
+
+/* App shell and navigation */
+header, nav, aside {
+  background: rgba(10, 11, 12, .88) !important;
+  border-color: var(--yf-line) !important;
+  backdrop-filter: blur(18px);
+}
+a { color: var(--yf-text); }
+a:hover { color: var(--yf-amber); }
+
+/* Replace the legacy blue controls with the Forge palette. */
+button, [role="button"] {
+  border-color: rgba(255, 151, 55, .28) !important;
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease !important;
+}
+button:hover, [role="button"]:hover { filter: brightness(1.1); transform: translateY(-1px); }
+button:not(:disabled), [role="button"] { color: var(--yf-text) !important; }
+input, select {
+  color: var(--yf-text) !important; background: #0d0f11 !important;
+  border: 1px solid var(--yf-line) !important; border-radius: 14px !important;
+}
+
+/* Large route banners become compact, premium headers rather than empty peach space. */
+main, [role="main"] { min-height: calc(100vh - 72px); }
+main > div, [role="main"] > div { max-width: 1240px; }
+main h1, [role="main"] h1 {
+  color: var(--yf-text) !important; letter-spacing: -.035em;
+  font-size: clamp(2rem, 4vw, 4.25rem) !important; line-height: .98 !important;
+  text-shadow: 0 0 34px rgba(255, 108, 14, .2);
+}
+main h2, main h3, [role="main"] h2, [role="main"] h3 { color: var(--yf-text) !important; }
+
+/* Catch the generated hero/card surfaces without depending on hashed class names. */
+[style*="rgb(252"], [style*="#fca"], [style*="linear-gradient"] {
+  background: linear-gradient(135deg, #1a1b1d 0%, #101112 58%, #21130c 100%) !important;
+  color: var(--yf-text) !important;
+}
+section, article {
+  border-color: var(--yf-line) !important;
+}
+section > div, article > div {
+  border-color: rgba(255, 145, 48, .12) !important;
+}
+
+/* Cards: stronger hierarchy, more breathing room, and responsive widths. */
+[class*="card"], [class*="Card"], [class*="pool"], [class*="Pool"] {
+  border-color: var(--yf-line) !important;
+}
+[class*="card"]:not(img), [class*="Card"]:not(img) {
+  box-shadow: 0 18px 48px rgba(0,0,0,.22) !important;
+}
+img { max-width: 100%; height: auto; }
+
+/* Brand buttons */
+button[disabled] { opacity: .48 !important; }
+button:not([disabled]), a[class*="button"], a[class*="Button"] {
+  background: linear-gradient(135deg, var(--yf-orange), var(--yf-hot)) !important;
+  box-shadow: 0 8px 24px rgba(255, 84, 10, .2) !important;
+}
+
+footer { color: var(--yf-muted) !important; border-color: var(--yf-line) !important; }
+@media (max-width: 800px) {
+  main, [role="main"] { padding-inline: 14px !important; }
+  main h1, [role="main"] h1 { font-size: clamp(2rem, 11vw, 3.4rem) !important; }
+  [class*="card"], [class*="Card"] { border-radius: 20px !important; }
+}

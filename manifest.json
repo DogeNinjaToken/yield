@@ -1,0 +1,16 @@
+{
+  "short_name": "YieldForge",
+  "name": "YieldForge",
+  "description": "Stake tokens and earn FORGE on Robinhood Chain",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "type": "image/x-icon",
+      "sizes": "256x256"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#000000"
+}

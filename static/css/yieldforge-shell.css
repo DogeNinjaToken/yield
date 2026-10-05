@@ -1,0 +1,77 @@
+/* YieldForge protocol shell — 2026 visual system */
+:root {
+  --forge-ink: #08090b;
+  --forge-surface: rgba(23, 25, 29, .88);
+  --forge-surface-solid: #17191d;
+  --forge-edge: rgba(255,255,255,.10);
+  --forge-fire: #ff5a16;
+  --forge-gold: #ffbd3b;
+  --forge-blue: #6d8cff;
+}
+
+body {
+  background-color: var(--forge-ink) !important;
+  background-image: linear-gradient(90deg, rgba(8,9,11,.94) 0%, rgba(8,9,11,.72) 48%, rgba(8,9,11,.84) 100%), url('/images/bg3.png') !important;
+  background-position: center top !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+}
+body::before { opacity: .08 !important; }
+
+/* glass navigation surfaces */
+header, nav, aside {
+  background: rgba(10,11,14,.78) !important;
+  border-color: rgba(255,255,255,.09) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,.22) !important;
+  backdrop-filter: blur(24px) saturate(1.2) !important;
+}
+
+/* The peach route banners become cinematic Forge panels. */
+[style*="rgb(252"], [style*="#fca"], [style*="#FCA"], [style*="252, 164"] {
+  background-image: linear-gradient(110deg, rgba(8,9,11,.96) 0%, rgba(24,19,17,.78) 58%, rgba(255,90,22,.28) 100%), url('/images/bg2.jpg') !important;
+  background-size: cover !important;
+  background-position: center 42% !important;
+  border-bottom: 1px solid rgba(255,189,59,.24) !important;
+}
+
+/* Keep content centred on a wide dashboard rather than the old narrow column. */
+main, [role="main"] { max-width: 1380px !important; margin-inline: auto !important; }
+main > div, [role="main"] > div { max-width: 1180px !important; }
+main h1, [role="main"] h1 { font-weight: 760 !important; letter-spacing: -.055em !important; }
+
+/* Dashboard cards use a layered, machined-metal treatment. */
+[class*="card"], [class*="Card"], [class*="pool"], [class*="Pool"] {
+  background: linear-gradient(145deg, rgba(38,40,44,.96), rgba(17,19,22,.96)) !important;
+  border: 1px solid var(--forge-edge) !important;
+  border-radius: 22px !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 22px 70px rgba(0,0,0,.28) !important;
+}
+[class*="card"]::before, [class*="Card"]::before {
+  content: ""; display: block; height: 2px; position: absolute; left: 18px; right: 18px; top: 0;
+  background: linear-gradient(90deg, transparent, var(--forge-fire), var(--forge-gold), transparent);
+  opacity: .7;
+}
+
+/* Fire is reserved for actions and live status. */
+button:not([disabled]), a[class*="button"], a[class*="Button"] {
+  background: linear-gradient(135deg, #ff7b1a, #ef3c0c) !important;
+  border: 1px solid rgba(255,206,125,.38) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 25px rgba(255,75,14,.22) !important;
+}
+button:not([disabled]):hover { box-shadow: 0 12px 32px rgba(255,75,14,.38) !important; }
+
+/* Remove the dated blue controls without flattening the hierarchy. */
+button[style*="blue"], [style*="rgb(21, 24, 220)"], [style*="#1518dc"] {
+  background: #242830 !important; border-color: rgba(255,255,255,.16) !important;
+}
+input, select { background: rgba(7,8,10,.7) !important; border-color: rgba(255,255,255,.14) !important; }
+
+/* Status rail */
+footer, [class*="footer"], [class*="Footer"] {
+  background: rgba(9,10,12,.88) !important; border-top: 1px solid rgba(255,189,59,.17) !important;
+}
+@media (max-width: 800px) {
+  body { background-position: 58% top !important; }
+  main, [role="main"] { padding-inline: 16px !important; }
+}

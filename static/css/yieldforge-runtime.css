@@ -1,0 +1,106 @@
+.yf-runtime-bar{position:sticky;top:0;z-index:1000;height:74px;display:flex;align-items:center;gap:28px;padding:0 28px;background:rgba(10,11,14,.92);border-bottom:1px solid rgba(255,255,255,.1);backdrop-filter:blur(18px)}
+.yf-runtime-brand{display:flex;align-items:center;min-width:190px}.yf-runtime-brand img{width:146px;height:auto;object-fit:contain}
+.yf-runtime-nav{display:flex;align-items:center;gap:8px;background:#25272c;padding:6px;border-radius:999px}.yf-runtime-nav a{color:#e7e8eb!important;text-decoration:none;padding:11px 18px;border-radius:999px;font-size:14px;font-weight:700}.yf-runtime-nav a:hover{background:#ff5a16!important;color:#fff!important}
+.yf-runtime-spacer{flex:1}.yf-runtime-wallet{border:0;border-radius:999px!important;padding:12px 22px!important;background:linear-gradient(135deg,#ff8a1c,#f04410)!important;color:#fff!important;font-weight:800}
+.yf-runtime-side{display:none!important}.yf-runtime-mounted main,[role=main]{margin-left:0!important;width:100%!important;max-width:1280px!important;margin-right:auto!important;margin-left:auto!important}
+.yf-runtime-hero{background:linear-gradient(110deg,rgba(10,11,14,.96),rgba(43,28,18,.78)),url('/images/bg2.jpg') center/cover!important;border-radius:28px!important;border:1px solid rgba(255,174,61,.2)!important}
+@media(max-width:800px){.yf-runtime-bar{height:62px;padding:0 14px;gap:10px}.yf-runtime-brand{min-width:0}.yf-runtime-brand img{width:120px}.yf-runtime-nav{display:none}.yf-runtime-wallet{padding:10px 14px!important;font-size:12px}}
+
+/* Production shell pass: these selectors are applied by yieldforge-ui.js to
+   the real React nodes after they exist, so they survive hashed class names. */
+#root.yf-runtime-mounted,
+#root.yf-runtime-mounted > div,
+#root.yf-runtime-mounted > div > div { background: transparent !important; }
+
+body {
+  min-width: 320px;
+  background-color: #050607 !important;
+  background-image:
+    linear-gradient(90deg, rgba(5,6,7,.94) 0%, rgba(5,6,7,.70) 43%, rgba(5,6,7,.86) 100%),
+    url('/images/bg3.png') !important;
+  background-size: cover !important;
+  background-position: center top !important;
+  background-attachment: fixed !important;
+}
+
+.yf-legacy-sidebar { display: none !important; }
+.yf-shell-no-sidebar { width: 100% !important; min-width: 0 !important; }
+.yf-legacy-content {
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin-left: 0 !important;
+  flex: 1 1 auto !important;
+}
+
+.yf-runtime-mounted [class*="sc-dWddBi"],
+.yf-runtime-mounted [class*="sc-FyeoB"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+}
+
+/* The supplied banner becomes a cinematic hero over the forge/anvil artwork. */
+.yf-hero-art {
+  position: relative !important;
+  overflow: hidden !important;
+  min-height: 220px !important;
+  padding: 10px 24px !important;
+  border: 1px solid rgba(255, 188, 72, .22) !important;
+  border-radius: 28px !important;
+  background:
+    linear-gradient(90deg, rgba(8,9,11,.30), rgba(8,9,11,.08), rgba(8,9,11,.48)),
+    url('/images/bg2.jpg') center 56% / cover no-repeat !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.10), 0 28px 90px rgba(0,0,0,.38) !important;
+}
+.yf-hero-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,116,20,.10), transparent 42%, rgba(0,0,0,.38));
+}
+.yf-banner-art {
+  position: relative !important;
+  z-index: 1 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 200px !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 18px 24px rgba(0,0,0,.40)) !important;
+}
+
+/* Stable card roles: dark machined glass, with fire used only as an accent. */
+.yf-stake-card, .yf-stats-card, .yf-tvl-card, .yf-emission-card {
+  position: relative !important;
+  overflow: hidden !important;
+  background:
+    linear-gradient(145deg, rgba(38,40,45,.92), rgba(14,16,19,.94)) !important;
+  border: 1px solid rgba(255,255,255,.11) !important;
+  border-radius: 24px !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 22px 64px rgba(0,0,0,.34) !important;
+  backdrop-filter: blur(18px) saturate(1.12) !important;
+}
+.yf-stake-card::before, .yf-stats-card::before, .yf-tvl-card::before, .yf-emission-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 24px; right: 24px; height: 2px;
+  background: linear-gradient(90deg, transparent, #ff6a18 30%, #ffc04a 70%, transparent);
+  opacity: .72;
+}
+.yf-stake-card h1, .yf-stake-card h2, .yf-stats-card h1, .yf-stats-card h2,
+.yf-tvl-card h1, .yf-tvl-card h2, .yf-emission-card h1, .yf-emission-card h2 {
+  color: #f8f7f3 !important;
+  letter-spacing: -.035em !important;
+}
+
+/* Reflow the original two-column dashboard after the sidebar is removed. */
+.yf-runtime-mounted [class*="sc-jSgvzq"] { max-width: 1180px !important; margin-inline: auto !important; }
+.yf-runtime-mounted [class*="sc-jSgvzq"] > [class*="itpRUN"] { min-width: 0 !important; }
+.yf-runtime-mounted [class*="sc-jSgvzq"] > [class*="gbtONh"] { gap: 24px !important; }
+
+@media (max-width: 800px) {
+  .yf-hero-art { min-height: 142px !important; padding: 4px 8px !important; border-radius: 20px !important; }
+  .yf-banner-art { height: 128px !important; }
+  .yf-runtime-mounted [class*="sc-jSgvzq"] { margin-inline: 12px !important; }
+}
