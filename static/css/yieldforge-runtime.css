@@ -104,3 +104,163 @@ body {
   .yf-banner-art { height: 128px !important; }
   .yf-runtime-mounted [class*="sc-jSgvzq"] { margin-inline: 12px !important; }
 }
+
+/* Refined protocol header — no oversized pill, no cartoon-orange button. */
+.yf-runtime-bar {
+  position: sticky !important;
+  top: 0 !important;
+  height: 82px !important;
+  padding: 0 clamp(18px, 4vw, 56px) !important;
+  gap: 30px !important;
+  background: linear-gradient(180deg, rgba(7,8,10,.94), rgba(7,8,10,.74)) !important;
+  border-bottom: 1px solid rgba(255,255,255,.10) !important;
+  box-shadow: 0 14px 42px rgba(0,0,0,.24) !important;
+  backdrop-filter: blur(24px) saturate(1.25) !important;
+}
+.yf-runtime-brand {
+  min-width: 224px !important;
+  gap: 11px !important;
+  text-decoration: none !important;
+}
+.yf-runtime-emblem {
+  width: 38px !important;
+  height: 38px !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 0 12px rgba(255,91,18,.22)) !important;
+}
+.yf-runtime-brand-copy { display: flex; flex-direction: column; gap: 2px; }
+.yf-runtime-brand-copy img { width: 142px !important; height: auto !important; object-fit: contain !important; }
+.yf-runtime-brand-copy small {
+  color: rgba(255,255,255,.46) !important;
+  font-size: 8px !important;
+  font-weight: 800 !important;
+  letter-spacing: .24em !important;
+  line-height: 1 !important;
+}
+.yf-runtime-nav {
+  display: flex !important;
+  align-items: center !important;
+  gap: 3px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+.yf-runtime-nav a {
+  position: relative !important;
+  color: rgba(247,247,242,.68) !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  border-radius: 12px !important;
+  padding: 12px 15px !important;
+  font-size: 13px !important;
+  font-weight: 750 !important;
+  letter-spacing: .01em !important;
+  transition: color .18s ease, background .18s ease, border-color .18s ease !important;
+}
+.yf-runtime-nav a::after {
+  content: "";
+  position: absolute;
+  left: 15px; right: 15px; bottom: 4px; height: 2px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #ff6616, #ffc04a);
+  opacity: 0;
+  transform: scaleX(.45);
+  transition: opacity .18s ease, transform .18s ease;
+}
+.yf-runtime-nav a:hover,
+.yf-runtime-nav a.is-active {
+  color: #fff !important;
+  background: rgba(255,255,255,.065) !important;
+  border-color: rgba(255,255,255,.10) !important;
+}
+.yf-runtime-nav a.is-active::after,
+.yf-runtime-nav a:hover::after { opacity: 1; transform: scaleX(1); }
+.yf-runtime-network {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 5px;
+  padding: 8px 12px;
+  color: rgba(247,247,242,.55);
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.yf-runtime-network-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #7df1a5;
+  box-shadow: 0 0 0 4px rgba(125,241,165,.10), 0 0 14px rgba(125,241,165,.55);
+}
+.yf-runtime-wallet {
+  min-width: 142px !important;
+  padding: 11px 17px !important;
+  color: #fff !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.055)) !important;
+  border: 1px solid rgba(255,153,70,.55) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.09) !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+}
+.yf-runtime-wallet:hover {
+  background: linear-gradient(180deg, rgba(255,121,30,.24), rgba(255,121,30,.10)) !important;
+  border-color: rgba(255,190,102,.80) !important;
+}
+
+/* The original component is a fixed 240px div and can reappear when React
+   refreshes its className. Hide the stable generated shell class as well as
+   the runtime class, so it cannot return on scroll. */
+.yf-runtime-mounted [class*="sc-dtTHTy"] { display: none !important; }
+.yf-runtime-mounted [class*="sc-xyEDr"] { width: 100% !important; min-width: 0 !important; }
+.yf-runtime-mounted [class*="sc-dWddBi"] { left: 0 !important; width: 100% !important; }
+
+/* Replace the old 1200x200 animated title strip with a restrained route panel. */
+.yf-hero-art {
+  min-height: 168px !important;
+  height: 168px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  background:
+    linear-gradient(90deg, rgba(7,8,10,.18), rgba(7,8,10,.42)),
+    url('/images/bg2.jpg') center 58% / cover no-repeat !important;
+}
+.yf-route-pools .yf-hero-art,
+.yf-route-stocks .yf-hero-art {
+  background-image:
+    linear-gradient(90deg, rgba(7,8,10,.22), rgba(7,8,10,.58)),
+    url('/images/bg3.png') !important;
+  background-position: center 62% !important;
+  background-size: cover !important;
+}
+.yf-banner-art { display: none !important; }
+.yf-hero-art::before {
+  position: relative;
+  z-index: 2;
+  display: block;
+  padding: 0 26px 24px;
+  color: #fff;
+  content: "YIELDFORGE  /  FORGE PROTOCOL";
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .28em;
+  text-shadow: 0 2px 18px rgba(0,0,0,.75);
+}
+.yf-route-stocks .yf-hero-art::before { content: "STOCK STAKING  /  FORGE YIELD"; }
+.yf-route-pools .yf-hero-art::before { content: "TOKEN STAKING  /  FORGE POOLS"; }
+.yf-route-vaults .yf-hero-art::before { content: "INCENTIVE VAULTS  /  FORGE REWARDS"; }
+
+@media (max-width: 800px) {
+  .yf-runtime-bar { height: 68px !important; padding: 0 14px !important; gap: 12px !important; }
+  .yf-runtime-brand { min-width: 0 !important; }
+  .yf-runtime-emblem { width: 32px !important; height: 32px !important; }
+  .yf-runtime-brand-copy img { width: 112px !important; }
+  .yf-runtime-brand-copy small, .yf-runtime-network { display: none !important; }
+  .yf-runtime-nav { display: none !important; }
+  .yf-runtime-wallet { min-width: 0 !important; padding: 10px 12px !important; font-size: 12px !important; }
+  .yf-hero-art { height: 128px !important; min-height: 128px !important; border-radius: 20px !important; }
+  .yf-hero-art::before { padding: 0 16px 17px; font-size: 9px; letter-spacing: .18em; }
+}

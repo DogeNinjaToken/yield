@@ -3,6 +3,9 @@
 
   function decorate(root) {
     root.classList.add('yf-runtime-mounted');
+    var pathname = window.location.pathname.replace(/\/+$/, '') || '/';
+    root.classList.remove('yf-route-home', 'yf-route-stocks', 'yf-route-pools', 'yf-route-vaults');
+    root.classList.add(pathname === '/' ? 'yf-route-home' : pathname.indexOf('/stocks') === 0 ? 'yf-route-stocks' : pathname.indexOf('/pools') === 0 ? 'yf-route-pools' : pathname.indexOf('/staking') === 0 ? 'yf-route-vaults' : 'yf-route-home');
 
     /* The original shell is a fixed 240px div, not a nav. Give it a stable
        class so the new shell can remove it without touching React logic. */
@@ -19,6 +22,22 @@
         }
       }
     });
+
+    var topBar = root.querySelector('.yf-runtime-bar');
+    if (topBar) {
+      var topWallet = topBar.querySelector('.yf-runtime-wallet');
+      var appWallet = Array.prototype.slice.call(root.querySelectorAll('button')).find(function (button) {
+        return button !== topWallet && /0x|connect|unlock/i.test(button.textContent || '');
+      });
+      if (appWallet && topWallet) topWallet.onclick = function () { appWallet.click(); };
+      Array.prototype.slice.call(topBar.querySelectorAll('.yf-runtime-nav a')).forEach(function (link) {
+        var linkPath = (new URL(link.href, window.location.origin)).pathname.replace(/\/+$/, '') || '/';
+        var active = linkPath === '/' ? pathname === '/' : pathname === linkPath || pathname.indexOf(linkPath + '/') === 0;
+        link.classList.toggle('is-active', active);
+        if (active) link.setAttribute('aria-current', 'page');
+        else link.removeAttribute('aria-current');
+      });
+    }
 
     var art = root.querySelector('img.banner');
     if (art) {
@@ -64,31 +83,21 @@
     bar.className = 'yf-runtime-bar';
 
     bar.innerHTML =
-      '<a class="yf-runtime-brand" href="/">' +
-        '<img src="/images/LogoTextNewDark.png" alt="YieldForge">' +
+      '<a class="yf-runtime-brand" href="/" aria-label="YieldForge home">' +
+        '<img class="yf-runtime-emblem" src="/images/yieldforge-logo.png" alt="">' +
+        '<span class="yf-runtime-brand-copy"><img src="/images/LogoTextNewDark.png" alt="YieldForge"><small>FORGE PROTOCOL</small></span>' +
       '</a>' +
       '<nav class="yf-runtime-nav">' +
         '<a href="/">Home</a>' +
         '<a href="/stocks/">Stock Staking</a>' +
-        '<a href="/staking/">Token Staking</a>' +
+        '<a href="/pools/">Token Staking</a>' +
       '</nav>' +
+      '<div class="yf-runtime-network"><span class="yf-runtime-network-dot"></span><span>Robinhood</span></div>' +
       '<div class="yf-runtime-spacer"></div>' +
       '<button class="yf-runtime-wallet">Connect wallet</button>';
 
     root.insertBefore(bar, root.firstChild);
     decorate(root);
-
-    var wallet = Array.prototype.slice.call(
-      root.querySelectorAll('button')
-    ).find(function (button) {
-      return /0x|connect|unlock/i.test(button.textContent || '');
-    });
-
-    if (wallet) {
-      bar.querySelector('.yf-runtime-wallet').onclick = function () {
-        wallet.click();
-      };
-    }
 
     Array.prototype.slice.call(root.querySelectorAll('nav')).forEach(function (nav) {
       if (nav !== bar.querySelector('.yf-runtime-nav')) {
@@ -103,6 +112,8 @@
 
   new MutationObserver(boot).observe(document.documentElement, {
     childList: true,
-    subtree: true
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['class', 'style']
   });
 })();
