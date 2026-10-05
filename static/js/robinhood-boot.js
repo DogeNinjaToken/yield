@@ -17,6 +17,9 @@ async function rpc(method,params){const res=await fetch(c.rpcUrl,{method:'POST',
 const call=(to,data)=>rpc('eth_call',[{to,data},'latest']);
 const word=x=>BigInt(x).toString(16).padStart(64,'0');
 const addr=x=>'0x'+x.slice(26,66);
+/* Mount the real application immediately. Network validation is deliberately
+   non-blocking so a slow RPC cannot leave the user staring at a blank shell. */
+loadMain();
 try{
  if(![4663,46630].includes(c.chainId))throw Error('Unsupported chain ID');
  if(Number(await rpc('eth_chainId',[]))!==c.chainId)throw Error('RPC chain ID does not match configuration');
@@ -50,7 +53,6 @@ try{
  if(!seen.has(0))throw Error('Include pool 0');
  for(const v of c.vaults){if(!window.RH.address(v.address)||!c.tokens[v.stakingToken]||!c.tokens[v.earningToken]||!Number.isInteger(v.sousId)||v.sousId<=0)throw Error('Invalid vault configuration');}
  const banner=document.createElement('div');banner.textContent=c.chainName+' · Amounts are token units, not underlying shares. USD/APR estimates require a configured token price; zero means unavailable or no rewards. '+(c.chainId===46630?'Testnet — tokens have no monetary value.':'');banner.style.cssText='padding:8px 16px;background:#15291b;color:#d9ecda;font:13px/1.4 sans-serif;position:fixed;bottom:0;right:0;max-width:calc(100% - 32px);z-index:1000';document.body.prepend(banner);
- loadMain();
  window.ethereum?.on?.('chainChanged',()=>window.location.reload());
 }catch(e){
  console.error('YieldForge RPC validation warning:',e);
