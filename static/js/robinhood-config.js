@@ -3,7 +3,7 @@ window.ROBINHOOD_FARM = {
   "enabled": true,
   "chainId": 46630,
   "chainName": "Robinhood Chain Testnet",
-  "rpcUrl": "https://rpc.testnet.chain.robinhood.com",
+  "rpcUrl": "rpcUrl": "https://robinhood-testnet.core.chainstack.com/886084a9b4890db74f7411c4905e8b3b",
   "explorerUrl": "https://explorer.testnet.chain.robinhood.com",
   "tokenAddress": "0x07b8c397aBDbbD5825285F247E86992Af7594B7f",
   "masterChefAddress": "0x03B3c29Dd4C3760aA3A51BEEb6b7346FCD82D916",
