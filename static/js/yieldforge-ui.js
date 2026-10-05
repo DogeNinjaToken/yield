@@ -2,10 +2,16 @@
   'use strict';
 
   function decorate(root) {
-    root.classList.add('yf-runtime-mounted');
+    if (!root.classList.contains('yf-runtime-mounted')) root.classList.add('yf-runtime-mounted');
     var pathname = window.location.pathname.replace(/\/+$/, '') || '/';
-    root.classList.remove('yf-route-home', 'yf-route-stocks', 'yf-route-pools', 'yf-route-vaults');
-    root.classList.add(pathname === '/' ? 'yf-route-home' : pathname.indexOf('/stocks') === 0 ? 'yf-route-stocks' : pathname.indexOf('/pools') === 0 ? 'yf-route-pools' : pathname.indexOf('/staking') === 0 ? 'yf-route-vaults' : 'yf-route-home');
+    var routeClass = pathname === '/' ? 'yf-route-home' : pathname.indexOf('/stocks') === 0 ? 'yf-route-stocks' : pathname.indexOf('/pools') === 0 ? 'yf-route-pools' : pathname.indexOf('/staking') === 0 ? 'yf-route-vaults' : 'yf-route-home';
+    if (root.getAttribute('data-yf-route') !== routeClass || !root.classList.contains(routeClass)) {
+      ['yf-route-home', 'yf-route-stocks', 'yf-route-pools', 'yf-route-vaults'].forEach(function (name) {
+        if (name !== routeClass && root.classList.contains(name)) root.classList.remove(name);
+      });
+      if (!root.classList.contains(routeClass)) root.classList.add(routeClass);
+      root.setAttribute('data-yf-route', routeClass);
+    }
 
     /* The original shell is a fixed 240px div, not a nav. Give it a stable
        class so the new shell can remove it without touching React logic. */
@@ -33,9 +39,9 @@
       Array.prototype.slice.call(topBar.querySelectorAll('.yf-runtime-nav a')).forEach(function (link) {
         var linkPath = (new URL(link.href, window.location.origin)).pathname.replace(/\/+$/, '') || '/';
         var active = linkPath === '/' ? pathname === '/' : pathname === linkPath || pathname.indexOf(linkPath + '/') === 0;
-        link.classList.toggle('is-active', active);
-        if (active) link.setAttribute('aria-current', 'page');
-        else link.removeAttribute('aria-current');
+        if (link.classList.contains('is-active') !== active) link.classList.toggle('is-active', active);
+        if (active && link.getAttribute('aria-current') !== 'page') link.setAttribute('aria-current', 'page');
+        else if (!active && link.hasAttribute('aria-current')) link.removeAttribute('aria-current');
       });
     }
 

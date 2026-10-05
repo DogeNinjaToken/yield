@@ -4,9 +4,14 @@
   "description": "Stake tokens and earn FORGE on Robinhood Chain",
   "icons": [
     {
-      "src": "favicon.ico",
-      "type": "image/x-icon",
-      "sizes": "256x256"
+      "src": "/favicon_io/android-chrome-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/favicon_io/android-chrome-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
